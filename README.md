@@ -1,4 +1,4 @@
-# Selectel CloudStorage drive
+# Selectel CloudStorage drive for AdonisJS
 
 # Requirements
 - [AdonisJS Drive](https://github.com/adonisjs/adonis-drive) (`adonis install @adonisjs/drive`)
