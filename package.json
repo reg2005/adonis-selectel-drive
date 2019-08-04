@@ -1,6 +1,6 @@
 {
   "name": "adonis-selectel-drive",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Selectel cloudStorage driver for Adonis drive",
   "main": "src/Selectel/index.js",
   "homepage": "https://github.com/reg2005/adonis-selectel-drive",
