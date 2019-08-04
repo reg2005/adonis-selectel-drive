@@ -45,8 +45,6 @@ SELECTEL_CONTAINER_URL=
 const isExists = await Drive.disk('selectel').exists('adonis.jpeg')
 ```
 
-Complete example please go to [this link](examples/routes.js)
-
 # Thanks
 Special thanks to the creator(s) of [AdonisJS](http://adonisjs.com/) for creating such a great framework.
 
