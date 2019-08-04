@@ -1,0 +1,37 @@
+{
+  "name": "adonis-selectel-drive",
+  "version": "1.0.0",
+  "description": "Selectel cloudStorage driver for Adonis drive",
+  "main": "src/Selectel/index.js",
+  "scripts": {
+    "lint": "standard",
+    "pretest": "npm run lint",
+    "test": "japa"
+  },
+  "private": true,
+  "keywords": [
+    "adonisjs",
+    "adonis-framework"
+  ],
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "@adonisjs/drive": "^1.0.4",
+    "@adonisjs/fold": "^4.0.9",
+    "@adonisjs/sink": "^1.0.13",
+    "dotenv": "^8.0.0",
+    "japa": "^1.0.5",
+    "japa-cli": "^1.0.1",
+    "standard": "^10.0.3"
+  },
+  "standard": {
+    "ignore": [
+      "examples",
+      "test/*"
+    ]
+  },
+  "dependencies": {
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7"
+  }
+}
