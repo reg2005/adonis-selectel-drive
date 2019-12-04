@@ -41,7 +41,7 @@ test.group('SelectelDriveManager', () => {
 
     list = await drive.list()
     assert.equal(list.length, 0)
-    const url = await drive.put(testFileContent, 'test/example.txt')
+    const url = await drive.put("test/example.txt", testFileContent);
 
     assert.equal(!!url, true)
     list = await drive.list()

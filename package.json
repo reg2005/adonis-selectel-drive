@@ -1,12 +1,12 @@
 {
   "name": "adonis-selectel-drive",
-  "version": "1.0.5",
+  "version": "1.0.12",
   "description": "Selectel cloudStorage driver for Adonis drive",
   "main": "src/Selectel/index.js",
   "homepage": "https://github.com/reg2005/adonis-selectel-drive",
   "scripts": {
     "lint": "standard",
-    "pretest": "npm run lint",
+    "pretest": "npm run lint --fix",
     "test": "japa"
   },
   "keywords": [

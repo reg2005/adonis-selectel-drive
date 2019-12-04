@@ -8,7 +8,7 @@ const SelectelStorage = require('./../Selectel')
  * @class Selectel
  */
 class Selectel {
-  constructor (config) {
+  constructor(config) {
     this.config = config
     this.selectel = new SelectelStorage()
   }
@@ -23,7 +23,7 @@ class Selectel {
    *
    * @return {Promise<Boolean>}
    */
-  async auth () {
+  async auth() {
     await this.selectel.auth(this.config.login, this.config.password)
   }
 
@@ -37,10 +37,10 @@ class Selectel {
    *
    * @return {Promise<Boolean>}
    */
-  async list () {
+  async list() {
     await this.auth()
     let response = await this.selectel.fetchFiles(this.config.container, {
-      format: 'json'
+      format: "json"
     })
     return JSON.parse(response.body)
   }
@@ -55,7 +55,7 @@ class Selectel {
    *
    * @return {Promise<Boolean>}
    */
-  async exists (location) {
+  async exists(location) {
     try {
       return !!(await this.get(location))
     } catch (e) {
@@ -75,9 +75,12 @@ class Selectel {
    *
    * @return {Promise<String>}
    */
-  async put (fullLocalPath, hostingPath) {
+  async put(hostingPath, fullLocalPath) {
     await this.auth()
-    let response = await this.selectel.uploadFile(fullLocalPath, this.config.container + '/' + hostingPath)
+    let response = await this.selectel.uploadFile(
+      fullLocalPath,
+      this.config.container + "/" + hostingPath
+    )
     return response.url
   }
 
@@ -91,9 +94,11 @@ class Selectel {
    *
    * @return {Promise<Boolean>}
    */
-  async delete (location) {
+  async delete(location) {
     await this.auth()
-    const result = await this.selectel.deleteFile(this.config.container + '/' + location)
+    const result = await this.selectel.deleteFile(
+      this.config.container + "/" + location
+    )
     return result
   }
 
@@ -108,9 +113,11 @@ class Selectel {
    *
    * @return {Promise<String>}
    */
-  async get (location) {
+  async get(location) {
     await this.auth()
-    const result = await this.selectel.getFile(this.config.container + '/' + location)
+    const result = await this.selectel.getFile(
+      this.config.container + "/" + location
+    )
     return result.body
   }
 
@@ -126,9 +133,12 @@ class Selectel {
    *
    * @return {Promise<String>}
    */
-  async copy (src, dest) {
+  async copy(src, dest) {
     await this.auth()
-    const result = await this.selectel.copyFile(this.config.container + '/' + src, this.config.container + '/' + dest)
+    const result = await this.selectel.copyFile(
+      this.config.container + "/" + src,
+      this.config.container + "/" + dest
+    )
     return result.body
   }
 
@@ -145,7 +155,7 @@ class Selectel {
    *
    * @return {Promise<String>}
    */
-  async move (src, dest, destBucket) {
+  async move(src, dest, destBucket) {
     const srcbucket = this._bucket.get()
     const url = await this.copy(src, dest, destBucket)
     await this.bucket(srcbucket).delete(src)
@@ -164,7 +174,7 @@ class Selectel {
    *
    * @return {String}
    */
-  getUrl (location, bucket) {
+  getUrl(location, bucket) {
     bucket = bucket || this._bucket.pull()
     const protocol = this.minioClient.protocol
     const host = this.minioClient.host
@@ -188,15 +198,22 @@ class Selectel {
    *
    * @return {Promise<String>}
    */
-  getSignedUrl (location, expiry = 600) {
+  getSignedUrl(location, expiry = 600) {
     return new Promise((resolve, reject) => {
-      this.exists(location).then(exists => {
-        if (!exists) return reject(FileNotFoundException.file(location))
-        this.minioClient.presignedGetObject(this._bucket.pull(), location, expiry, function (err, presignedUrl) {
-          if (err) return reject(err)
-          return resolve(presignedUrl)
+      this.exists(location)
+        .then(exists => {
+          if (!exists) return reject(FileNotFoundException.file(location))
+          this.minioClient.presignedGetObject(
+            this._bucket.pull(),
+            location,
+            expiry,
+            function(err, presignedUrl) {
+              if (err) return reject(err)
+              return resolve(presignedUrl)
+            }
+          )
         })
-      }).catch(err => reject(err))
+        .catch(err => reject(err))
     })
   }
 }
