@@ -390,6 +390,7 @@ Selectel.prototype.deleteFile = function (filePath) {
 Selectel.prototype.getFile = function (filePath) {
   return this.requestPromiseWithFullResponse({
     url: this.storageUrl + filePath,
+    encoding: "binary",
     method: 'GET',
     headers: {
       'X-Auth-Token': this.authToken
